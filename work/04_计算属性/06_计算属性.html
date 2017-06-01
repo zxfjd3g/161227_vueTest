@@ -14,18 +14,60 @@
     2. 当属性变化时, 回调函数自动调用, 在函数内部进行计算
   计算属性高级:
     通过get/set方法实现对属性数据的显示和监视
+
+  计算属性:
+    有缓存, 在页面中多次读取数据, 只调用1次get()
 -->
 <div id="demo">
-  姓: <input type="text" placeholder="First Name"><br>
-  名: <input type="text" placeholder="Last Name"><br>
-  姓名1(单向): <input type="text" placeholder="Full Name"><br>
-  姓名2(单向): <input type="text" placeholder="Full Name"><br>
-  姓名3(双向): <input type="text" placeholder="Full Name2"><br>
+  姓: <input type="text" placeholder="First Name" v-model="firstName"><br>
+  名: <input type="text" placeholder="Last Name" v-model="lastName"><br>
+  姓名1(单向): <input type="text" placeholder="Full Name" v-model="fullName1"><br>
+  姓名2(单向): <input type="text" placeholder="Full Name" v-model="fullName2"><br>
+  姓名3(双向): <input type="text" placeholder="Full Name2" v-model="fullName3"><br>
+  {{fullName3}}---{{fullName3}}----{{fullName3}}
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  var vm = new Vue({
+    el : '#demo',
+    data : {
+      firstName: 'Kobe2',
+      lastName: 'Bryant2',
+      fullName2: 'Kobe2 Bryant2'
+    },
+    methods : {
 
+    },
+    computed: { // 计算属性: 需要的数据是根据现在的数据来计算得到的
+      fullName1: function () {
+        return this.firstName + '-' + this.lastName
+      },
+
+      fullName3: {
+        get() {// 用来得到当前属性值, 当读取当前属性值时回调
+          console.log('fullName3 get()')
+          return this.firstName + '--' + this.lastName
+        },
+        set(val) { // 监视当前属性值的变化, 当属性值发生变化时回调      xxx--yyy
+          // 更新相关的属性数据
+          var names = val.split('--')
+          this.firstName = names[0]
+          this.lastName = names[1]
+        }
+      }
+    }
+  })
+
+  //监视firstName
+  vm.$watch('firstName', function (val) {
+    // 更新fullName2
+    this.fullName2 = val + ' ' + this.lastName
+  })
+  //监视lastName
+  vm.$watch('lastName', function (val) {
+    this.fullName2 = this.firstName + ' ' + val
+  })
 </script>
 </body>
 </html>
