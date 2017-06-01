@@ -16,12 +16,64 @@
 <div id="demo">
 
   <h2>测试: v-for 遍历数组</h2>
+  <ul>
+    <li v-for="p in persons | filterBy 'a' in 'name'">
+      {{$index}}---{{p.name}}---{{p.age}}
+      ---<button @click="deleteP(p)">删除</button>
+      ---<button @click="updateP(p, {name:'xax', age:18})">更新</button>
+    </li>
+  </ul>
 
   <h2>测试: v-for 遍历对象</h2>
+  <ul>
+    <li v-for="value in persons[1]">
+     {{$key}}----{{value}}
+    </li>
+  </ul>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el : '#demo',
+    data : {
+      persons: [ // set()
+        {name: 'Tom', age: 23},
+        {name: 'Jack', age: 24},
+        {name: 'Bob', age: 20},
+        {name: 'Cat', age: 21},
+        {name: 'Damu', age: 19},
+      ]
+    },
+    methods : {
+      /*deleteP (index) { // 一旦有过滤, 下标就很可能不正确
+        console.log(index)
+        this.persons.splice(index, 1)
+      }*/
+      deleteP (p) {
+        // 得到p所对应的下标
+        var index = this.persons.indexOf(p)
+        console.log(index)
+        // 根据真实下标删除
+        this.persons.splice(index, 1)
+
+        this.persons.$remove(p)
+
+        // his.persons = []
+      },
+
+      updateP (oldP, newP) {
+        // 得到下标
+        var index = this.persons.indexOf(oldP)
+        // this.persons[index] = newP  // 不会更新界面
+        this.persons.$set(index, newP)
+      }
+    },
+
+    computed : {
+
+    }
+  })
 </script>
 </body>
 </html>
