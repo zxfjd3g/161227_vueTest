@@ -3,14 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <title>12_动画2</title>
+  <style>
+    .bounce-transition {
+      display: inline-block; /* 否则 scale 动画不起作用 */
+    }
+    .bounce-enter {
+      animation: bounce-in .5s;
+    }
+    .bounce-leave {
+      animation: bounce-out .5s;
+    }
+    @keyframes bounce-in {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(1.5);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    @keyframes bounce-out {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.5);
+      }
+      100% {
+        transform: scale(0);
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div id="anim" class="demo">
+<div id="demo">
+  <div v-show="show" :transition="xxx">hello</div>
+  <br>
+  <button @click="show = !show">切换</button>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
-<script>
+<script type="text/javascript">
+  new Vue({
+    el : '#demo',
+    data : {
+      show: true,
+      xxx: 'bounce'
+    }
+  })
 </script>
 </body>
 </html>
