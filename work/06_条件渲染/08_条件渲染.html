@@ -18,15 +18,40 @@
 
 <div id="demo">
   <h1>测试: 切换一个元素</h1>
+  <p v-if="like">I Love You!</p>
+  <p v-else>You Love Me!!!</p>
+
+  <p v-show="like">我喜欢你</p>
+  <p v-show="!like">你喜欢我</p>
+
+  <button @click="like=!like">切换</button>
 
 
   <h1>测试: 切换多个元素</h1>
-
+  <template v-if="ok"> <!--不会真正进入页面-->
+    <p>xxxxx</p>
+    <p>yyyy</p>
+    <p>zzzzzz</p>
+  </template>
 
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el : '#demo',
+    data : {
+      like: false,
+      ok: true
+    },
+    methods : {
+
+    },
+
+    computed : {
+
+    }
+  })
 </script>
 </body>
 </html>
