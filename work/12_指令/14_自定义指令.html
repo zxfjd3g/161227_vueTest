@@ -23,12 +23,40 @@
   this.el
 -->
 
-<div id="demo">
+<div id="demo1">
+  <p v-upper-text="msg"></p>
+  <p v-lower-text="msg"></p>
+</div>
+
+<div id="demo2">
+  <p v-upper-text="msg"></p>
+  <p v-lower-text="msg"></p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  // 定义全局指令
+  Vue.directive('upper-text', function (value) {
+    this.el.innerHTML = value.toUpperCase()
+  })
+  new Vue({
+    el : '#demo1',
+    data : {
+      msg: 'NBA I Love This Game'
+    },
+    directives: {
+      'lower-text' (value) {
+        this.el.innerHTML = value.toLowerCase()
+      }
+    }
+  })
 
+  new Vue({
+    el : '#demo2',
+    data : {
+      msg: 'I Can Play'
+    }
+  })
 </script>
 </body>
 </html>

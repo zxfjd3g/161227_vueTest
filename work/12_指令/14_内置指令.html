@@ -11,7 +11,7 @@
 </head>
 <body>
 <!--
-  v:text : 更新元素的 textContent
+  v-text : 更新元素的 textContent
   v-html : 更新元素的 innerHTML
   v-if : 如果为true, 当前标签才会输出到页面
   v-else: 如果为false, 当前标签才会输出到页面
@@ -24,10 +24,36 @@
   v-cloak : 使用它防止闪现表达式, 与css配合: [v-cloak] { display: none }
 -->
 <div id="example">
+  <p v-text="msg"></p>
+  <p v-html="msg"></p>
+  <p v-cloak>{{msg}}</p>
+  <p><img :src="imgSrc"></p>
+  <p>
+    <span v-el:msg>atguigu.com</span>
+    <button @click="showMsg">提示文本</button>
+  </p>
+
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el : '#example',
+    data : {
+      msg: '<a href="http://www.baidu.com">百度</a>',
+      imgSrc: 'http://v1-cn.vuejs.org/images/logo.png'
+    },
+    methods : {
+      showMsg () {
+        var spanEle = this.$els.msg
+        alert(spanEle.innerHTML)
+      }
+    },
+
+    computed : {
+
+    }
+  })
 </script>
 </body>
 </html>
