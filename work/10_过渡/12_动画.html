@@ -27,6 +27,37 @@
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+
+  // 监视整个动画的过程
+  Vue.transition('expand', {
+
+    beforeEnter: function (el) { // 开始进入之前
+      el.textContent = 'beforeEnter'
+      console.log('beforeEnter()')
+    },
+    enter: function (el) { // 开始进入
+      el.textContent = 'enter'
+      console.log('enter()')
+    },
+    afterEnter: function (el) { // 进入完成
+      el.textContent = 'afterEnter'
+      console.log('afterEnter()')
+    },
+    beforeLeave: function (el) { // 开始离开之前
+      el.textContent = 'beforeLeave'
+      console.log('beforeLeave()')
+    },
+    leave: function (el) { // 开始离开
+      el.textContent = 'leave'
+      console.log('leave()')
+    },
+    afterLeave: function (el) { // 离开完成
+      el.textContent = 'afterLeave'
+      console.log('afterLeave()')
+    }
+  })
+
+
   new Vue({
     el : '#demo',
     data : {
@@ -34,6 +65,8 @@
       xxx: 'expand'
     }
   })
+
+
 </script>
 </body>
 </html>

@@ -1,6 +1,9 @@
 * Vue.js是什么?
 	* 一位华裔前Google工程师开发的前端js库
-	* 一个MVVM的框架
+	* 一个M-V-VM的框架
+	  * M model data数据
+	  * V view 模板页面
+	  * VM viewModel Vue的实例对象
 	* 核心概念
 	  * 数据绑定
 	  * 组件
@@ -13,6 +16,7 @@
 		* el : 指定dom标签容器的选择器
 		* data : 指定初始化状态属性数据的对象
 		        对象/函数(返回一个对象)
+		* vm代理了data所有的属性的操作(读写)
 	* 页面中
 		* 使用v-model: 实现双向数据绑定
 		* 使用{{}}: 显示数据
@@ -41,7 +45,7 @@
 		  * 在创建对象时指定: get name () {return xxx} / set name (value) {}
 		  * 对象创建之后指定: Object.defineProperty(obj, age, {get(){}, set(value){}})
 	* watch
-	  * Vue.$watch()
+	  * Vue.$watch(propertyName, function(value){})
 		* 包含多个属性监视的对象
 		* 分为一般监视和深度监视
       ```
@@ -54,7 +58,7 @@
 * 扩展数组
   * 对数组的常用方法进行了包装(用于数据绑定)
 	* $remove(item) : 删除数组中对应的元素
-	* $set(index, ele) : 给数组中指定下标指定对应的元素 
+	* $set(index, ele) : 给数组中指定下标指定对应的元素  arr[index] = ele
 
 * 过渡
   * 利用vue去操控css的动画
@@ -170,12 +174,12 @@
       ```
 
 * git管理项目
-  * 在github上创建仓库
+  * 在github上创建远程仓库
   * 为项目添加.gitignore, 并指定要忽略的文件/文件夹
   * 为项目添加README.md文件
   * git config --global  user.name "zxfjd3g"  设置github账号
   * git config --global user.email "258147149@qq.com"  设置github邮箱
-  * git init  初始化本地仓库
+  * git init  初始化本地仓库(.git)
   * git add * 从工作区添加到缓存区
   * git commit -m "xxx" 从缓存区提交到版本区(本地)
   * git remote add origin url  与github远程仓库进行关联
