@@ -6,10 +6,25 @@
 </head>
 <body>
 <div id="demo">
+  <p v-my-directive="msg"></p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="vue-myPlugin.js"></script>
 <script type="text/javascript">
+  //console.log(MyPlugin)
+  //声明使用vue-myPlugin
+  Vue.use(MyPlugin)
+
+
+  Vue.myGlobalMethod()
+  var vm = new Vue({
+    el : '#demo',
+    data : {
+      msg: 'atguigu.com'
+    }
+  })
+  vm.$myMethod()
 
 </script>
 </body>
