@@ -173,6 +173,9 @@
   * 在github上创建仓库
   * 为项目添加.gitignore, 并指定要忽略的文件/文件夹
   * 为项目添加README.md文件
+  * git config --global  user.name "zxfjd3g"  设置github账号
+  * git config --global user.email "258147149@qq.com"  设置github邮箱
+  * git init  初始化本地仓库
   * git add * 从工作区添加到缓存区
   * git commit -m "xxx" 从缓存区提交到版本区(本地)
   * git remote add origin url  与github远程仓库进行关联
