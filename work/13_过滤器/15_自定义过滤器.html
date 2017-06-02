@@ -25,11 +25,31 @@
 
 <div id="example">
   <!--过滤器reverse: 对指定值进行倒序显示-->
+  <p>{{msg | reverse}}</p>
   <!--过滤器wrap: 在指定值的左侧和右侧添加指定的文本-->
+  <p>{{msg | wrap '左边的文本' '右边的文本'}}</p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  //全局过滤器
+  Vue.filter('reverse', function (value) {
+    return value.split('').reverse().join('')
+  })
+
+
+  new Vue({
+    el: '#example',
+    data: {
+      msg: '来自尚硅谷的你, NB'
+    },
+    //局部过滤器
+    filters: {
+      wrap (value, left, right) {
+        return left +' '+value+' '+right
+      }
+    }
+  })
 </script>
 </body>
 </html>

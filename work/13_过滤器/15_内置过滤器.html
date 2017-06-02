@@ -6,7 +6,7 @@
 </head>
 <body>
 <!--
-1. capitalize : 首字母大小
+1. capitalize : 首字母大写
 2. uppercase : 全部大写
 3. lowercase : 全部小写
 4. currency : 货币化
@@ -18,10 +18,56 @@
 9. orderBy : 对数组进行排序
 -->
 <div id="example">
+  <p>{{msg | capitalize}}</p>
+  <p>{{msg | uppercase}}</p>
+  <p>{{msg | lowercase}}</p>
+  <p>{{money | currency 'RMB'}}</p>
+  <p>{{persons | json}}</p>
+
+
+  <ul>
+    <li v-for="p in persons">{{p | json}}</li>
+  </ul>
+
+  <ul>
+    <li v-for="p in persons | limitBy 2 1">{{p | json}}</li>
+  </ul>
+
+  <ul>
+    <li v-for="p in persons | filterBy 'a' in 'name'">{{p | json}}</li>
+  </ul>
+
+  <ul>
+    <li v-for="p in persons | orderBy 'age'">{{p | json}}</li>
+  </ul>
+
+  <ul>
+    <li v-for="p in persons | orderBy 'age' -1">{{p | json}}</li>
+  </ul>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el : '#example',
+    data : {
+      msg: 'i Will Back',
+      money: 15000,
+      persons: [
+        {name:'Tom', age:12},
+        {name:'Bob', age:15},
+        {name:'Jack', age:13},
+        {name:'SaDamu', age:14},
+      ]
+    },
+    methods : {
+
+    },
+
+    computed : {
+
+    }
+  })
 </script>
 </body>
 </html>
