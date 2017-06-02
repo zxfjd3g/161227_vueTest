@@ -5,14 +5,17 @@
   <title>13_生命周期</title>
 </head>
 <body>
+
 <div>
+  <button @click="destroyVue">destory vue</button>
+  <p v-show="isShow">atguigu</p>
 </div>
 <!--
 vue对象的生命周期
 1. 初始化显示
   * new vue()
   * created() : 在此启动异步任务(ajax请求, 定时器)
-  * beforeCompiled()
+  * beforeCompiled():
   * compiled()
   * ready()
 2. 销毁vue实例: vm.$destory()
@@ -21,6 +24,55 @@ vue对象的生命周期
 -->
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el : 'body',
+    data : {
+      isShow: true
+    },
+    methods : {
+      destroyVue () {
+        console.log('destroyVue()')
+        this.$destroy()
+      }
+    },
+
+    created() {
+      console.log('created()')
+      //启动定时器
+      /*setInterval(function () { // 定时器中的回调函数的this是window
+        this.isShow = !this.isShow
+        console.log(this)
+      }, 1000)*/
+/*
+      setInterval(() => { // 使用箭头函数
+        this.isShow = !this.isShow
+        console.log(this)
+      }, 1000)
+
+      */
+      this.intervalId = setInterval(function () { // 使用bind绑定
+        this.isShow = !this.isShow
+        console.log(this)
+      }.bind(this), 1000)
+    },
+    beforeCompile() {
+      console.log('beforeCompile()')
+    },
+    compiled() {
+      console.log('compiled()')
+    },
+    ready() {
+      console.log('ready()')
+    },
+    beforeDestroy() {
+      console.log('beforeDestroy()')
+      // 做清理的工作
+      clearInterval(this.intervalId)
+    },
+    destroyed() {
+      console.log('destroyed()')
+    },
+  })
 </script>
 </body>
 </html>
